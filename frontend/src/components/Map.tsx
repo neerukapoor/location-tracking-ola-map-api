@@ -36,9 +36,9 @@ const Map: React.FC<MapProps> = ({ latitude, longitude }) => {
 
         // Add the API key to the URL based on existing parameters
         if (url.includes("?")) {
-            url = url + "&api_key=gyneMURjIyRHlAanQy5JicQ0eQLFnfCdEPyx6S9B";
+            url = url + "&api_key=";
         } else {
-            url = url + "?api_key=gyneMURjIyRHlAanQy5JicQ0eQLFnfCdEPyx6S9B";
+            url = url + "?api_key=";
         }
         return { url, resourceType };
         },
