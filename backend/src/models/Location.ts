@@ -1,17 +1,27 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Schema, Document } from 'mongoose';
 
-interface ILocation extends Document {
+interface ILocation {
+  timestamp: Date;
   latitude: number;
   longitude: number;
-  timestamp: Date;
-  userId: string;
+}
+
+export interface IDailyLocation extends Document {
+  employeeId: mongoose.Types.ObjectId;
+  date: string;
+  locations: ILocation[];
 }
 
 const LocationSchema: Schema = new Schema({
+  timestamp: { type: Date, required: true },
   latitude: { type: Number, required: true },
-  longitude: { type: Number, required: true },
-  timestamp: { type: Date, default: Date.now },
-  userId: { type: String, required: true },
+  longitude: { type: Number, required: true }
+}, { _id: false });
+
+const DailyLocationSchema: Schema = new Schema({
+  employeeId: { type: Schema.Types.ObjectId, ref: 'Employee', required: true },
+  date: { type: String, required: true },
+  locations: { type: [LocationSchema], default: [] }
 });
 
-export default mongoose.model<ILocation>('Location', LocationSchema);
+export default mongoose.model<IDailyLocation>('DailyLocation', DailyLocationSchema);
