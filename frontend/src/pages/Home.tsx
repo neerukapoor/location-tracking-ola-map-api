@@ -5,6 +5,7 @@ import Map from '../components/Map';
 const Home: React.FC = () => {
   const userId = '123'; // Replace with actual user ID
   const location = useLocation(userId);
+  console.log("neeru location " + location)
 
   return (
     <div>

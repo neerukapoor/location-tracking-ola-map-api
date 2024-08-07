@@ -16,6 +16,7 @@ const signupCredentialSyntax = z.object({
 
 const loginCredentialSyntax = z.object({
   adminname: z.string().min(3).max(30),
+  password: z.string()
 })
 
 export const signup = async (req: Request, res: Response) => {

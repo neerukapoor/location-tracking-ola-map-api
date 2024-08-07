@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
 import Employee from '../models/Employee';
 import z from 'zod';
 

@@ -6,6 +6,8 @@ import http from 'http';
 import WebSocket, { WebSocketServer } from 'ws';
 import adminAuthRoutes from './routes/adminAuthRoutes';
 import adminRoutes from './routes/adminRoutes';
+import employeeAuthRoutes from './routes/employeeAuthRoutes'
+import employeeRoutes from './routes/employeeRoutes'
 import Employee from './models/Employee';
 import DailyLocation from './models/Location';
 
@@ -15,13 +17,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 const server = http.createServer(app);
-const wss = new WebSocketServer({ server });
-
 
 // app.use('/locations', locationRoutes);
 
 app.use('/admin/auth', adminAuthRoutes);
 app.use('/admin', adminRoutes);
+
+
+app.use('/employee/auth', employeeAuthRoutes);
+app.use('/employee', employeeRoutes);
 
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI || '';
@@ -32,6 +36,8 @@ mongoose.connect(MONGO_URI, {
 }).catch(err => {
   console.error('Database connection error:', err);
 });
+
+const wss = new WebSocketServer({ port: 8080 });
 
 wss.on('connection', (ws) => {
   ws.on('message', async (message) => {
@@ -47,9 +53,12 @@ wss.on('connection', (ws) => {
       // Store location data in MongoDB
       const locationData = { timestamp: new Date(), latitude, longitude };
 
+      // Ensure the date string is formatted as YYYY-MM-DD
+      const date = new Date().toISOString().split('T')[0];
+
       await DailyLocation.findOneAndUpdate(
         { employeeId },
-        { $set: { latitude, longitude, timestamp: new Date() } },
+        { $push: { locations: locationData } },
         { new: true, upsert: true }
       );
 

@@ -1,5 +1,6 @@
+// src/components/AdminDashboard.tsx
 import React, { useEffect, useState } from 'react';
-import Map from '../components/Map';
+import Map from './Map';
 
 interface Location {
   latitude: number;
@@ -10,10 +11,12 @@ const AdminDashboard: React.FC = () => {
   const [currentLocation, setCurrentLocation] = useState<Location>({ latitude: 0, longitude: 0 });
 
   useEffect(() => {
+    console.log("neeru in dashboard")
     const ws = new WebSocket('ws://localhost:8080');
 
     ws.onmessage = (event) => {
       const { latitude, longitude } = JSON.parse(event.data);
+      console.log("neeru in admin dashboard " + latitude + " " + longitude)
       setCurrentLocation({ latitude, longitude });
     };
 

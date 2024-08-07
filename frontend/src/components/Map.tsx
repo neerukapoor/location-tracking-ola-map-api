@@ -11,17 +11,17 @@ const Map: React.FC<MapProps> = ({ latitude, longitude }) => {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
   const markerRef = useRef<Marker | null>(null);
-  const geojsonRef = useRef<GeoJSON.FeatureCollection<GeoJSON.Geometry>>({
-    type: "FeatureCollection",
-    features: [{
-      type: "Feature",
-      geometry: {
-        type: "LineString",
-        coordinates: []
-      },
-      properties: {}
-    }]
-  });
+  // const geojsonRef = useRef<GeoJSON.FeatureCollection<GeoJSON.Geometry>>({
+  //   type: "FeatureCollection",
+  //   features: [{
+  //     type: "Feature",
+  //     geometry: {
+  //       type: "LineString",
+  //       coordinates: []
+  //     },
+  //     properties: {}
+  //   }]
+  // });
 
   useEffect(() => {
     if (mapContainer.current) {
