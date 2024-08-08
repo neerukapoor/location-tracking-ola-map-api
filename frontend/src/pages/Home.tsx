@@ -9,11 +9,13 @@ const Home: React.FC = () => {
 
   return (
     <div>
-      {location ? (
+      {/* {location ? (
         <Map latitude={location.latitude} longitude={location.longitude} />
       ) : (
         <div>Loading...</div>
-      )}
+      )} */}
+      Hello from home
+      <button className="btn btn-primary">Primary</button>
     </div>
   );
 };
