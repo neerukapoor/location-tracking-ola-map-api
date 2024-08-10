@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import Admin from '../models/Admin';
 import z from "zod";
 import Employee from '../models/Employee';
 

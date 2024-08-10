@@ -1,11 +1,12 @@
 import { Router } from 'express';
-import { registerEmployee, showAllEmployees } from '../controllers/adminEmployeeController';
+import { loggedInAdmin, registerEmployee, showAllEmployees } from '../controllers/adminEmployeeController';
 import { authenticateJWTToken } from '../middleware/adminAuthMiddleware';
 
 const router = Router();
 
 // router.get('/locations/:userId', authenticateJWTToken, getLocations);
 router.post('/registerEmployee', authenticateJWTToken, registerEmployee);
-router.post('/showEmployee', authenticateJWTToken, showAllEmployees);
+router.get('/showEmployee', authenticateJWTToken, showAllEmployees);
+router.get('/name', loggedInAdmin);
 
 export default router;

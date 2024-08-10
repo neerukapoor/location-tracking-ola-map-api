@@ -25,8 +25,9 @@ const useLogin = () => {
                 body: JSON.stringify({adminname, password})
             })
             const data = await res.json();
-            localStorage.setItem("token", JSON.stringify(data.jwtToken));
-            setAuthUser(data.jwtToken)
+            console.log("neeru In useLogin" + data.token)
+            localStorage.setItem("jwtToken", JSON.stringify(data.token));
+            setAuthUser(data.token)
         } catch (e) {
             if (e instanceof Error) {
                 toast.error(e.message);

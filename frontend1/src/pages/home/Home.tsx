@@ -1,8 +1,9 @@
+import RegisteredEmployeesContainer from "../../components/RegisteredEmployees";
+
 const Home = () => {
     return (
         <div>
-            Registered Users
-            
+            <RegisteredEmployeesContainer/>
         </div>
     )
 }

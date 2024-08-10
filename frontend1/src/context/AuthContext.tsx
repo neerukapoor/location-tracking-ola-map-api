@@ -1,6 +1,5 @@
 import { ReactNode, createContext, useContext, useState } from "react"
 
-
 interface AuthContextType {
     authUser: any;
     setAuthUser: (user: any) => void;
@@ -22,7 +21,7 @@ export const useAuthContext = () => {
 }
 
 export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
-    const storedToken = localStorage.getItem("token");
+    const storedToken = localStorage.getItem("jwtToken");
     const [authUser, setAuthUser] = useState(storedToken || null);
 
     return <AuthContext.Provider value={{authUser, setAuthUser}}>{children}</AuthContext.Provider>

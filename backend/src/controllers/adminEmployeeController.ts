@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import Employee from '../models/Employee';
 import z from 'zod';
+import Admin from '../models/Admin';
 
 // Function to generate a random string of given length
 const generateRandomString = (length: number): string => {
@@ -92,11 +93,22 @@ export const showAllEmployees = async (req: Request, res: Response) => {
     }));
 
     res.status(200).json({
-      message: "Employees retrieved successfully",
       employees: employeeDetails
     });
   } catch (error) {
     console.error("Error retrieving employees:", error);
     res.status(500).json({ message: "Internal Server Error" });
+  }
+}
+
+export const loggedInAdmin = async (req: Request, res: Response) => {
+  try {
+    const adminId = req.headers.id;
+    const adminName = await Admin.findOne({adminId});
+    if(!adminName)
+      return res.status(400).json({ message: 'Admin Name not found' });
+    res.status(200).send(adminName.adminname);
+  } catch(err) {
+    res.status(500).json({ message: 'Server error while fetching loged in Admin details', error: (err as Error).message });
   }
 }

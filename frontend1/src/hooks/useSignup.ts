@@ -28,8 +28,9 @@ const useSignup = () => {
             if(data.error) {
                 throw new Error(data.error)
             }
-            localStorage.setItem("token", JSON.stringify(data.jwtToken))
-            setAuthUser(data.jwtToken)
+            console.log("neeru in signup " + data.token)
+            localStorage.setItem("jwtToken", JSON.stringify(data.token))
+            setAuthUser(data.token)
         } catch (e) {
             if (e instanceof Error) {
                 toast.error(e.message);
@@ -42,7 +43,6 @@ const useSignup = () => {
     }
 
     return {loading, signup}
-
 }
 
 export default useSignup;
