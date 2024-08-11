@@ -25,7 +25,6 @@ const useLogin = () => {
                 body: JSON.stringify({adminname, password})
             })
             const data = await res.json();
-            console.log("neeru In useLogin" + data.token)
             localStorage.setItem("jwtToken", JSON.stringify(data.token));
             setAuthUser(data.token)
         } catch (e) {

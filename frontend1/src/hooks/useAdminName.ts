@@ -19,7 +19,6 @@ export const useAdminName = () => {
                     }
                 })
                 const data = await res.json();
-                console.log("neeru in admin name " + data)
                 if(data.error) {
                     throw new Error(data.error)
                 }
