@@ -8,7 +8,6 @@ import adminAuthRoutes from './routes/adminAuthRoutes';
 import adminRoutes from './routes/adminRoutes';
 import employeeAuthRoutes from './routes/employeeAuthRoutes'
 import employeeRoutes from './routes/employeeRoutes'
-import Employee from './models/Employee';
 import DailyLocation from './models/Location';
 
 dotenv.config();
@@ -49,7 +48,6 @@ wss.on('connection', (ws) => {
       };
 
       const { employeeId, latitude, longitude } = parsedMessage;
-
       // Store location data in MongoDB
       const locationData = { timestamp: new Date(), latitude, longitude };
 

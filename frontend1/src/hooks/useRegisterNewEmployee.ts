@@ -15,11 +15,9 @@ export const useRegisterNewEmployee = () => {
 
     const registerNewEmployee = async ({name, mobileNumber}: LoginParams) => {
         const success = handleInputErrors({name, mobileNumber});
-        console.log("ab yaha " + success)
         if (!success) 
             return;
-
-        console.log("ulta chla gaya")
+        
         setLoading(true);
         
         try {

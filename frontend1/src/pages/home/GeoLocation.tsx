@@ -1,19 +1,34 @@
 // src/pages/GeoLocation.tsx
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useEmployeeDetails } from "../../hooks/useEmployeeDetails";
+import MapContainer from "../../components/Map";
+import { useNavigate } from "react-router-dom";
 
 const GeoLocation: React.FC = () => {
-    const query = new URLSearchParams(useLocation().search);
-    const uniqueId = query.get("uniqueId");
+    const {loading, employeeDetails} = useEmployeeDetails();
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate("/")
+    }
 
     return (
-        <div className="flex justify-center items-center min-h-screen">
-            <h1 className="text-2xl">Hello from GeoLocation</h1>
-            {uniqueId && (
-                <p className="mt-4 text-lg">
-                    You are viewing the details for employee with ID: <strong>{uniqueId}</strong>
-                </p>
-            )}
+        <div className="flex flex-col min-h-screen">
+            <header className="flex justify-between items-start w-full p-4">
+                <h1 className="text-xl font-bold hover:cursor-pointer" onClick={handleClick}>GeoLocation</h1>
+                {loading ? (
+                    <div className="flex justify-center items-center">
+                        <span className="loading loading-spinner"></span>
+                    </div>
+                ) : (
+                    <div className="text-lg text-right">
+                        <strong>{employeeDetails?.name}</strong> | {employeeDetails?.mobileNumber}
+                    </div>
+                )}
+            </header>
+            <main className="flex-grow mt-4 text-center">
+                <MapContainer employeeId="66bb053daa78d1f214016e2c"/>
+            </main>
         </div>
     );
 };

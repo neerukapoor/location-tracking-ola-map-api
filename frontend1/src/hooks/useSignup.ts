@@ -28,7 +28,6 @@ const useSignup = () => {
             if(data.error) {
                 throw new Error(data.error)
             }
-            console.log("neeru in signup " + data.token)
             localStorage.setItem("jwtToken", JSON.stringify(data.token))
             setAuthUser(data.token)
         } catch (e) {

@@ -8,7 +8,3 @@ export const employeeId = async (req: Request, res: Response) => {
     const employeeId = req.headers["id"];
     res.send(employeeId);
 }
-
-export const employeeDetails = async (req: Request, res: Response) => {
-    
-}
