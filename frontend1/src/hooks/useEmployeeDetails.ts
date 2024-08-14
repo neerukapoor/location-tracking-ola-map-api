@@ -2,17 +2,12 @@ import { useEffect, useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import toast from "react-hot-toast";
 import { useLocation } from "react-router-dom";
-
-interface EmployeeInterface {
-    name: string,
-    uniqueId: string,
-    mobileNumber: string
-}
+import { useEmployeeDetailsContext } from "../context/EmployeeDetailsContext";
 
 export const useEmployeeDetails = () => {
     const [loading, setLoading] = useState(false);
     const {authUser} = useAuthContext();
-    const [employeeDetails, setEmployeeDetails] = useState<EmployeeInterface | null>(null);
+    const {employeeDetails, setEmployeeDetails} = useEmployeeDetailsContext();
     const query = new URLSearchParams(useLocation().search);
         const uniqueId = query.get("uniqueId");
     

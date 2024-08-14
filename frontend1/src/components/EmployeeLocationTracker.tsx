@@ -27,7 +27,7 @@ const EmployeeLocationTracker: React.FC<{ employeeId: string }> = ({ employeeId 
         navigator.geolocation.watchPosition(
             (position) => {
                 const { latitude, longitude } = position.coords;
-                console.log("neeru in employeetracker " + latitude + " " + longitude)
+                console.log("neeru in employeetracker " + "- " + employeeId + " -" + latitude + " " + longitude)
                 if (socket && socket.readyState === WebSocket.OPEN) {
                     socket.send(
                         JSON.stringify({

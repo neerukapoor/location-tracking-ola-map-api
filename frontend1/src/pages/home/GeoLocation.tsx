@@ -27,7 +27,7 @@ const GeoLocation: React.FC = () => {
                 )}
             </header>
             <main className="flex-grow mt-4 text-center">
-                <MapContainer employeeId="66bb053daa78d1f214016e2c"/>
+                <MapContainer employeeId={employeeDetails?.id || ''}/>
             </main>
         </div>
     );

@@ -29,9 +29,9 @@ const MapContainer: React.FC<{ employeeId: string }> = ({ employeeId }) => {
                                 url = url.replace("app.olamaps.io", "api.olamaps.io");
 
                                 if (url.includes("?")) {
-                                    url = url + "&api_key=";
+                                    url = url + "&api_key=izOXsZmtrqsWDVrtNImRf8fmO6FzsR1o9CyNwtlT";
                                 } else {
-                                    url = url + "?api_key=";
+                                    url = url + "?api_key=izOXsZmtrqsWDVrtNImRf8fmO6FzsR1o9CyNwtlT";
                                 }
                                 return { url, resourceType };
                             },
