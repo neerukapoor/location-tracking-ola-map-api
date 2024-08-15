@@ -1,6 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useEmployeeAuthContext } from "../context/EmployeeAuthContext";
+import { useNavigate } from "react-router-dom";
 
 interface LoginParams {
     uniqueId: string,
@@ -10,6 +11,7 @@ interface LoginParams {
 const useLogin = () => {
     const [loading, setLoading] = useState(false);
     const {setEmployeeAuthUser} = useEmployeeAuthContext();
+    const navigate = useNavigate();
 
     const login = async ({uniqueId, password}: LoginParams) => {
         const success = handleInputErrors({uniqueId, password})
@@ -27,6 +29,7 @@ const useLogin = () => {
             const data = await res.json();
             localStorage.setItem("jwtEmployeeToken", JSON.stringify(data.token));
             setEmployeeAuthUser(data.token)
+            navigate(`/employee?uniqueId=${uniqueId}`)
         } catch (e) {
             if (e instanceof Error) {
                 toast.error(e.message);

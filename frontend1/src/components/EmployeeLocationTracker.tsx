@@ -1,10 +1,11 @@
-// src/components/EmployeeLocationTracker.tsx
 import React, { useState, useEffect } from "react";
+import { useEmployeeDetailsForEmployeeContext } from "../context/EmployeeDetailsForEmployee";
 
-const EmployeeLocationTracker: React.FC<{ employeeId: string }> = ({ employeeId }) => {
+const EmployeeLocationTracker  = () => {
     const [tracking, setTracking] = useState(false);
     const [socket, setSocket] = useState<WebSocket | null>(null);
-
+    const {employeeDetailsForEmployee} = useEmployeeDetailsForEmployeeContext();
+     
     useEffect(() => {
         const socketInstance = new WebSocket("ws://localhost:8080");
         setSocket(socketInstance);
@@ -24,10 +25,11 @@ const EmployeeLocationTracker: React.FC<{ employeeId: string }> = ({ employeeId 
 
         setTracking(true);
 
+        const employeeId = employeeDetailsForEmployee?.id
         navigator.geolocation.watchPosition(
             (position) => {
                 const { latitude, longitude } = position.coords;
-                console.log("neeru in employeetracker " + "- " + employeeId + " -" + latitude + " " + longitude)
+                console.log("neeru in employeetracker " + "- " + employeeDetailsForEmployee?.id + " -" + latitude + " " + longitude)
                 if (socket && socket.readyState === WebSocket.OPEN) {
                     socket.send(
                         JSON.stringify({

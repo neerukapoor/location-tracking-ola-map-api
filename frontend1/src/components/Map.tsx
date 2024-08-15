@@ -19,6 +19,8 @@ const MapContainer: React.FC<{ employeeId: string }> = ({ employeeId }) => {
             if (data.employeeId === employeeId) {
                 const { latitude, longitude } = data;
 
+                setLocation({ latitude, longitude });
+
                 if (!mapRef.current) {
                     mapRef.current = new maplibregl.Map({
                         container: mapContainer.current!,
@@ -29,9 +31,9 @@ const MapContainer: React.FC<{ employeeId: string }> = ({ employeeId }) => {
                                 url = url.replace("app.olamaps.io", "api.olamaps.io");
 
                                 if (url.includes("?")) {
-                                    url = url + "&api_key=izOXsZmtrqsWDVrtNImRf8fmO6FzsR1o9CyNwtlT";
+                                    url = url + "&api_key=";
                                 } else {
-                                    url = url + "?api_key=izOXsZmtrqsWDVrtNImRf8fmO6FzsR1o9CyNwtlT";
+                                    url = url + "?api_key=";
                                 }
                                 return { url, resourceType };
                             },
@@ -50,7 +52,7 @@ const MapContainer: React.FC<{ employeeId: string }> = ({ employeeId }) => {
         return () => {
             socket.close(); // Clean up WebSocket connection
         };
-    }, [employeeId]);
+    }, [employeeId, location]);
 
     return (
         <div
