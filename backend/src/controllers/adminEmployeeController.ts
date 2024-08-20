@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import Employee from '../models/Employee';
 import z from 'zod';
 import Admin from '../models/Admin';
+import DailyLocation from '../models/Location'
 
 // Function to generate a random string of given length
 const generateRandomString = (length: number): string => {
@@ -139,3 +140,23 @@ export const employeeDetails = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Server error while fetching employee detail.', error: (err as Error).message });
   }
 }
+
+export const getLocationHistory = async (req: Request, res: Response) => {
+  try {
+      const { employeeId, date } = req.query;
+
+      if (!employeeId || !date) {
+          return res.status(400).json({ message: 'Employee ID and date are required.' });
+      }
+
+      const locationHistory = await DailyLocation.findOne({ employeeId, date }).exec();
+
+      if (!locationHistory) {
+          return res.status(404).json({ message: 'No location history found for this date.' });
+      }
+
+      return res.json(locationHistory);
+  } catch (err) {
+      return res.status(500).json({ message: 'Server error', error: (err as Error).message });
+  }
+};

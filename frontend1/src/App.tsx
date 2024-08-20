@@ -12,6 +12,7 @@ import EmployeeLogin from './pages/login/EmployeeLogin'
 import { useEmployeeDetailsContext } from './context/EmployeeDetailsContext'
 import { useEmployeeDetailsForEmployee } from './hooks/useEmployeeDetailsForEmployee'
 import Tracking from './pages/home/Tracking'
+import History from './pages/history/History'
 
 function App() {
   const {authUser} = useAuthContext();
@@ -28,6 +29,7 @@ function App() {
           <Route path="/signup"  element={authUser ? <Navigate to="/"/> : <Signup/>}/>
           <Route path="/register" element={authUser ? <RegisterNewEmployee /> : <Navigate to= "/login"/>} />
           <Route path="/map" element={authUser ? <GeoLocation /> : <Navigate to= "/login"/>} />
+          <Route path="/history" element={authUser ? <History /> : <Navigate to= "/login"/>} />
 
           {/* for employee */}
           <Route path="/employee/login" element={employeeAuthUser ? <Navigate to="/employee"/> : <EmployeeLogin/>}/>

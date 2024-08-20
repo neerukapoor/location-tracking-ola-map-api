@@ -55,7 +55,7 @@ wss.on('connection', (ws) => {
       const date = new Date().toISOString().split('T')[0];
 
       await DailyLocation.findOneAndUpdate(
-        { employeeId },
+        { employeeId, date },
         { $push: { locations: locationData } },
         { new: true, upsert: true }
       );

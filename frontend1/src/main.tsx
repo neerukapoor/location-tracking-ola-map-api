@@ -8,21 +8,24 @@ import { RegisteredEmployeesProvider } from './context/RegisteredEmployeesContex
 import { EmployeeAuthContextProvider } from './context/EmployeeAuthContext.tsx';
 import { EmployeeDetailsContextProvider } from './context/EmployeeDetailsContext.tsx';
 import { EmployeeDetailsForEmployeeContextProvider } from './context/EmployeeDetailsForEmployee.tsx';
+import { DateProvider } from './context/DateContext.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      <EmployeeDetailsForEmployeeContextProvider>
-        <EmployeeDetailsContextProvider>
-          <EmployeeAuthContextProvider>
-            <RegisteredEmployeesProvider>
-                <AuthContextProvider>
-                  <App />
-                </AuthContextProvider>
-            </RegisteredEmployeesProvider>
-          </EmployeeAuthContextProvider>
-        </EmployeeDetailsContextProvider>
-      </EmployeeDetailsForEmployeeContextProvider>
+      <DateProvider>
+        <EmployeeDetailsForEmployeeContextProvider>
+          <EmployeeDetailsContextProvider>
+            <EmployeeAuthContextProvider>
+              <RegisteredEmployeesProvider>
+                  <AuthContextProvider>
+                    <App />
+                  </AuthContextProvider>
+              </RegisteredEmployeesProvider>
+            </EmployeeAuthContextProvider>
+          </EmployeeDetailsContextProvider>
+        </EmployeeDetailsForEmployeeContextProvider>
+      </DateProvider>
     </BrowserRouter>
   </StrictMode>,
 )
