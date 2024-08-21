@@ -10,7 +10,6 @@ import EmployeeLocationTracker from './components/EmployeeLocationTracker'
 import { useEmployeeAuthContext } from './context/EmployeeAuthContext'
 import EmployeeLogin from './pages/login/EmployeeLogin'
 import { useEmployeeDetailsContext } from './context/EmployeeDetailsContext'
-import { useEmployeeDetailsForEmployee } from './hooks/useEmployeeDetailsForEmployee'
 import Tracking from './pages/home/Tracking'
 import History from './pages/history/History'
 

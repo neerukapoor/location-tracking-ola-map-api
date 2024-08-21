@@ -6,7 +6,7 @@ const MapContainer: React.FC<{ employeeId: string }> = ({ employeeId }) => {
     const mapContainer = useRef<HTMLDivElement | null>(null);
     const mapRef = useRef<MapLibreMap | null>(null);
     const markerRef = useRef<Marker | null>(null);
-    
+    const mapApiKey = import.meta.env.REACT_APP_OLA_MAP_API_KEY;
     const [location, setLocation] = useState<{ latitude: number; longitude: number } | null>(null);
 
     useEffect(() => {
@@ -31,9 +31,9 @@ const MapContainer: React.FC<{ employeeId: string }> = ({ employeeId }) => {
                                 url = url.replace("app.olamaps.io", "api.olamaps.io");
 
                                 if (url.includes("?")) {
-                                    url = url + "&api_key=";
+                                    url = url + `&api_key=${mapApiKey}`;
                                 } else {
-                                    url = url + "?api_key=";
+                                    url = url + `?api_key=${mapApiKey}`;
                                 }
                                 return { url, resourceType };
                             },

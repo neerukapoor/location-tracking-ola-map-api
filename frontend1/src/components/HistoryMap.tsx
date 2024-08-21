@@ -16,6 +16,7 @@ const HistoryMap: React.FC<{ employeeId: string }> = ({ employeeId }) => {
     const mapRef = useRef<MapLibreMap | null>(null);
     const [locations, setLocations] = useState<Location[]>([]);
     const {authUser} = useAuthContext();
+    const mapApiKey = import.meta.env.REACT_APP_OLA_MAP_API_KEY;
 
     useEffect(() => {
         const fetchLocationHistory = async () => {
@@ -54,9 +55,9 @@ const HistoryMap: React.FC<{ employeeId: string }> = ({ employeeId }) => {
                     url = url.replace("app.olamaps.io", "api.olamaps.io");
 
                     if (url.includes("?")) {
-                        url = url + "&api_key=";
+                        url = url + `&api_key=${mapApiKey}`;
                     } else {
-                        url = url + "?api_key=";
+                        url = url + `?api_key=${mapApiKey}`;
                     }
                     return { url, resourceType };
                 },
