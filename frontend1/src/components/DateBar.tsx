@@ -9,7 +9,6 @@ type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 const DateBar = () => {
-    const [value, onChange] = useState<Value>(new Date());
     const [showCalendar, setShowCalendar] = useState(false);
     const { selectedDate, setSelectedDate } = useDateContext();
 
