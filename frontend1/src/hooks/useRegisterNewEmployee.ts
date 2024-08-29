@@ -12,6 +12,7 @@ export const useRegisterNewEmployee = () => {
     const [loading, setLoading] = useState(false);
     const {authUser} = useAuthContext();
     const navigate = useNavigate();
+    const backendEndpoint = import.meta.env.REACT_APP_BACKEND_ENDPOINT
 
     const registerNewEmployee = async ({name, mobileNumber}: LoginParams) => {
         const success = handleInputErrors({name, mobileNumber});
@@ -21,7 +22,7 @@ export const useRegisterNewEmployee = () => {
         setLoading(true);
         
         try {
-            const res = await fetch("http://localhost:5000/admin/registerEmployee" , {
+            const res = await fetch(`${backendEndpoint}/admin/registerEmployee` , {
                 method: "POST",
                 headers: {"Content-Type" : "application/json",
                     "jwtToken": JSON.parse(authUser)
@@ -54,7 +55,6 @@ function handleInputErrors({name, mobileNumber}: LoginParams) {
         toast.error("Please fill in all fields.")
         return false;
     }
-    console.log("idhar ")
     const mobileNumberPattern = /^[0-9]{10}$/;
     toast("here Please enter a valid mobile number.");
     if (!mobileNumberPattern.test(mobileNumber)) {

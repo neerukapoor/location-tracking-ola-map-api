@@ -7,12 +7,13 @@ export const useShowEmployees = () => {
     const [loading, setLoading] = useState(false);
     const {authUser} = useAuthContext();
     const {registeredEmployees, setRegisteredEmployees} = useRegisteredEmployeesContext();
+    const backendEndpoint = import.meta.env.REACT_APP_BACKEND_ENDPOINT
 
     useEffect(() => { 
         const getRegisteredEmployees = async () => {
             setLoading(true);
             try {
-                const res = await fetch("http://localhost:5000/admin/showEmployee", {
+                const res = await fetch(`${backendEndpoint}/admin/showEmployee`, {
                     method: "GET",
                     headers: {"Content-Type": "application/json",
                         "jwtToken": JSON.parse(authUser)

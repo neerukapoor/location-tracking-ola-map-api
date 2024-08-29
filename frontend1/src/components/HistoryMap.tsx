@@ -17,6 +17,7 @@ const HistoryMap: React.FC<{ employeeId: string }> = ({ employeeId }) => {
     const [locations, setLocations] = useState<Location[]>([]);
     const {authUser} = useAuthContext();
     const mapApiKey = import.meta.env.REACT_APP_OLA_MAP_API_KEY;
+    const backendEndpoint = import.meta.env.REACT_APP_BACKEND_ENDPOINT
 
     useEffect(() => {
         const fetchLocationHistory = async () => {
@@ -26,7 +27,7 @@ const HistoryMap: React.FC<{ employeeId: string }> = ({ employeeId }) => {
 
             try {
                 const response = await fetch(
-                    `http://localhost:5000/admin/locationHistory?employeeId=${employeeId}&date=${dateStr}` , {
+                    `${backendEndpoint}/locationHistory?employeeId=${employeeId}&date=${dateStr}` , {
                         method: "GET",
                         headers: {"Content-Type" : "application/json",
                             "jwtToken": JSON.parse(authUser)

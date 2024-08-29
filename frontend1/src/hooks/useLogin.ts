@@ -10,16 +10,17 @@ interface LoginParams {
 const useLogin = () => {
     const [loading, setLoading] = useState(false);
     const {setAuthUser} = useAuthContext();
+    const backendEndpoint = import.meta.env.REACT_APP_BACKEND_ENDPOINT
 
     const login = async ({adminname, password}: LoginParams) => {
         const success = handleInputErrors({adminname, password})
-
+        console.log("neeru backend endpoint " + backendEndpoint)
         if (!success) 
             return;
         setLoading(true);
         
         try {
-            const res = await fetch("http://localhost:5000/admin/auth/login", {
+            const res = await fetch(`${backendEndpoint}/admin/auth/login`, {
                 method: "POST",
                 headers: {"Content-Type" : "application/json"},
                 body: JSON.stringify({adminname, password})

@@ -10,12 +10,13 @@ export const useEmployeeDetailsForEmployee = () => {
     const {employeeDetailsForEmployee, setEmployeeDetailsForEmployee} = useEmployeeDetailsForEmployeeContext();
     const query = new URLSearchParams(useLocation().search);
     const uniqueId = query.get("uniqueId");
+    const backendEndpoint = import.meta.env.REACT_APP_BACKEND_ENDPOINT
     
     useEffect(() => {
         const getEmployeeDetailsForEmployee = async () => {
             setLoading(true);
             try {
-                const res = await fetch(`http://localhost:5000/employee/employeeDetails?uniqueId=${uniqueId}`, {
+                const res = await fetch(`${backendEndpoint}/employee/employeeDetails?uniqueId=${uniqueId}`, {
                     method: "GET",
                     headers: {"Content-Type" : "application/json",
                         "jwtToken": JSON.parse(employeeAuthUser)

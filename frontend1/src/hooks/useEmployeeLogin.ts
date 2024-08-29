@@ -12,6 +12,7 @@ const useLogin = () => {
     const [loading, setLoading] = useState(false);
     const {setEmployeeAuthUser} = useEmployeeAuthContext();
     const navigate = useNavigate();
+    const backendEndpoint = import.meta.env.REACT_APP_BACKEND_ENDPOINT
 
     const login = async ({uniqueId, password}: LoginParams) => {
         const success = handleInputErrors({uniqueId, password})
@@ -21,7 +22,7 @@ const useLogin = () => {
         setLoading(true);
         
         try {
-            const res = await fetch("http://localhost:5000/employee/auth/login", {
+            const res = await fetch(`${backendEndpoint}/employee/auth/login`, {
                 method: "POST",
                 headers: {"Content-Type" : "application/json"},
                 body: JSON.stringify({uniqueId, password})

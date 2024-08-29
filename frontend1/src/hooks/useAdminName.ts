@@ -7,12 +7,13 @@ export const useAdminName = () => {
     const [loading, setLoading] = useState(false);
     const {authUser} = useAuthContext();
     const {adminName, setAdminName} = useAdminContext();
+    const backendEndpoint = import.meta.env.REACT_APP_BACKEND_ENDPOINT
 
     useEffect(() => { 
         const getLoggedInAdminName = async () => {
             setLoading(true);
             try {
-                const res = await fetch("http://localhost:5000/admin/name", {
+                const res = await fetch(`${backendEndpoint}/admin/name`, {
                     method: "GET",
                     headers: {"Content-Type": "application/json",
                         "jwtToken": JSON.parse(authUser)

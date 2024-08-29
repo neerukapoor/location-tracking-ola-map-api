@@ -10,6 +10,7 @@ interface SignupParams {
 const useSignup = () => {
     const [loading, setLoading] = useState(false);
     const {setAuthUser} = useAuthContext();
+    const backendEndpoint = import.meta.env.REACT_APP_BACKEND_ENDPOINT
 
     const signup = async({adminname, password}: SignupParams) => {
         const success = handleInputErrors({adminname, password})
@@ -18,7 +19,7 @@ const useSignup = () => {
     
         setLoading(true)
         try {
-            const res = await fetch("http://localhost:5000/admin/auth/signup", {
+            const res = await fetch(`${backendEndpoint}/admin/auth/signup`, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({adminname, password})
