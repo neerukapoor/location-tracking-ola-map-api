@@ -27,7 +27,7 @@ const HistoryMap: React.FC<{ employeeId: string }> = ({ employeeId }) => {
 
             try {
                 const response = await fetch(
-                    `${backendEndpoint}/locationHistory?employeeId=${employeeId}&date=${dateStr}` , {
+                    `${backendEndpoint}/admin/locationHistory?employeeId=${employeeId}&date=${dateStr}` , {
                         method: "GET",
                         headers: {"Content-Type" : "application/json",
                             "jwtToken": JSON.parse(authUser)
