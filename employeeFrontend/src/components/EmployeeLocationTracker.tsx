@@ -5,7 +5,7 @@ const EmployeeLocationTracker  = () => {
     const [tracking, setTracking] = useState(false);
     const [socket, setSocket] = useState<WebSocket | null>(null);
     const {employeeDetailsForEmployee} = useEmployeeDetailsForEmployeeContext();
-    const backendEndpoint = import.meta.env.REACT_APP_BACKEND_ENDPOINT;
+    const backendEndpoint = import.meta.env.REACT_APP_BACKEND_ENDPOINT1;
      
     useEffect(() => {
         const socketInstance = new WebSocket(`wss://${backendEndpoint}`);

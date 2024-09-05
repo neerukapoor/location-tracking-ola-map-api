@@ -7,7 +7,7 @@ const MapContainer: React.FC<{ employeeId: string }> = ({ employeeId }) => {
     const mapRef = useRef<MapLibreMap | null>(null);
     const markerRef = useRef<Marker | null>(null);
     const mapApiKey = import.meta.env.REACT_APP_OLA_MAP_API_KEY;
-    const backendEndpoint = import.meta.env.REACT_APP_BACKEND_ENDPOINT;
+    const backendEndpoint = import.meta.env.REACT_APP_BACKEND_ENDPOINT1;
     const [location, setLocation] = useState<{ latitude: number; longitude: number } | null>(null);
 
     useEffect(() => {
