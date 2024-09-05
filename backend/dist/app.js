@@ -63,7 +63,7 @@ mongoose_1.default.connect(MONGO_URI, {}).then(() => {
 }).catch(err => {
     console.error('Database connection error:', err);
 });
-const wss = new ws_1.WebSocketServer({ port: 8080 });
+const wss = new ws_1.WebSocketServer({ server });
 wss.on('connection', (ws) => {
     ws.on('message', (message) => __awaiter(void 0, void 0, void 0, function* () {
         try {
