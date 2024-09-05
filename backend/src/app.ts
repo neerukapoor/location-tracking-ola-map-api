@@ -36,7 +36,7 @@ mongoose.connect(MONGO_URI, {
   console.error('Database connection error:', err);
 });
 
-const wss = new WebSocketServer({ port: 8080 });
+const wss = new WebSocketServer({ server });
 
 wss.on('connection', (ws) => {
   ws.on('message', async (message) => {
