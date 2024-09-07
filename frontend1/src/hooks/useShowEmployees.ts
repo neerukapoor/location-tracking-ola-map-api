@@ -35,7 +35,7 @@ export const useShowEmployees = () => {
             }
         }
         getRegisteredEmployees();
-    },[])
+    },[setRegisteredEmployees])
 
     return {loading, registeredEmployees}
 }

@@ -52,7 +52,7 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             throw new Error('JWT_SECRET is not defined in environment variables');
         }
         const payload = { user: { id: user.id } };
-        jsonwebtoken_1.default.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' }, (err, token) => {
+        jsonwebtoken_1.default.sign(payload, process.env.JWT_SECRET, (err, token) => {
             if (err)
                 throw err;
             res.status(201).json({ token });
@@ -82,7 +82,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             throw new Error('JWT_SECRET is not defined in environment variables');
         }
         const payload = { user: { id: user.id } };
-        jsonwebtoken_1.default.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' }, (err, token) => {
+        jsonwebtoken_1.default.sign(payload, process.env.JWT_SECRET, (err, token) => {
             if (err)
                 throw err;
             res.json({ token });
