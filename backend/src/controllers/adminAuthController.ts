@@ -55,7 +55,7 @@ export const signup = async (req: Request, res: Response) => {
       throw new Error('JWT_SECRET is not defined in environment variables');
     }
     const payload = { user: { id: user.id} };
-    jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: '1h' }, (err, token) => {
+    jwt.sign(payload, process.env.JWT_SECRET!, (err, token) => {
       if (err) throw err;
       res.status(201).json({ token });
     });
@@ -85,7 +85,7 @@ export const login = async (req: Request, res: Response) => {
       throw new Error('JWT_SECRET is not defined in environment variables');
     }
     const payload = { user: { id: user.id} };
-    jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: '1h' }, (err, token) => {
+    jwt.sign(payload, process.env.JWT_SECRET!, (err, token) => {
       if (err) throw err;
       res.json({ token });
     });

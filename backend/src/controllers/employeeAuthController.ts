@@ -31,7 +31,7 @@ export const login = async (req: Request, res: Response) => {
       throw new Error('JWT_SECRET is not defined in environment variables');
     }
     const payload = { employee: { id: employee.id} };
-    jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: '1h' }, (err, token) => {
+    jwt.sign(payload, process.env.JWT_SECRET!, (err, token) => {
       if (err) throw err;
       res.json({ token });
     });
