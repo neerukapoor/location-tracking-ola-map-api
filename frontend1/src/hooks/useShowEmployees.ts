@@ -11,6 +11,7 @@ export const useShowEmployees = () => {
 
     useEffect(() => { 
         const getRegisteredEmployees = async () => {
+            if (!authUser) return; // Ensure authUser is available
             setLoading(true);
             try {
                 const res = await fetch(`${backendEndpoint}/admin/showEmployee`, {
@@ -35,7 +36,7 @@ export const useShowEmployees = () => {
             }
         }
         getRegisteredEmployees();
-    },[setRegisteredEmployees])
+    },[authUser])
 
     return {loading, registeredEmployees}
 }
