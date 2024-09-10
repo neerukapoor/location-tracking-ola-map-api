@@ -5,11 +5,11 @@ const EmployeeLocationTracker  = () => {
     const [tracking, setTracking] = useState(false);
     const [socket, setSocket] = useState<WebSocket | null>(null);
     const {employeeDetailsForEmployee} = useEmployeeDetailsForEmployeeContext();
-    const backendEndpoint = import.meta.env.REACT_APP_BACKEND_ENDPOINT1;
-    console.log("neeru backend address " + backendEndpoint)
+    const webSocketEndpoint = import.meta.env.REACT_APP_WEBSOCKET_ENDPOINT;
+    console.log("neeru websocket address " + webSocketEndpoint)
      
     useEffect(() => {
-        const socketInstance = new WebSocket(`wss://${backendEndpoint}`);
+        const socketInstance = new WebSocket(`${webSocketEndpoint}`);
         setSocket(socketInstance);
 
         return () => {

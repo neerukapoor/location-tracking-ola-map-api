@@ -18,6 +18,7 @@ function App() {
   const {employeeAuthUser} = useEmployeeAuthContext();
   const {employeeDetails} = useEmployeeDetailsContext();
   console.log("neeru in app.tsx " + employeeDetails?.id);
+  console.log("yaha " + import.meta.env.REACT_APP_BACKEND_ENDPOINT);
 
   return (
     <>

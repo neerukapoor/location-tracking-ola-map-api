@@ -1,7 +1,7 @@
+import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
 import http from 'http';
 import WebSocket, { WebSocketServer } from 'ws';
 import adminAuthRoutes from './routes/adminAuthRoutes';
@@ -10,15 +10,21 @@ import employeeAuthRoutes from './routes/employeeAuthRoutes'
 import employeeRoutes from './routes/employeeRoutes'
 import DailyLocation from './models/Location';
 
-dotenv.config();
-
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+if (process.env.NODE_ENV === 'production') {
+  dotenv.config({ path: '.env.production' });
+} else if (process.env.NODE_ENV === 'staging') {
+  dotenv.config({ path: '.env.staging' });
+} else {
+  dotenv.config(); // Load default .env file for development
+}
+
 const server = http.createServer(app);
 
-// app.use('/locations', locationRoutes);
-
+console.log('Current NODE_ENV adf:', process.env.NODE_ENV);
 app.use('/admin/auth', adminAuthRoutes);
 app.use('/admin', adminRoutes);
 
@@ -36,7 +42,13 @@ mongoose.connect(MONGO_URI, {
   console.error('Database connection error:', err);
 });
 
-const wss = new WebSocketServer({ server });
+let wss;
+if (process.env.NODE_ENV === 'production') {
+  wss = new WebSocketServer({ server });
+}
+else {
+  wss = new WebSocketServer({ port: 8080 });
+}
 
 wss.on('connection', (ws) => {
   ws.on('message', async (message) => {

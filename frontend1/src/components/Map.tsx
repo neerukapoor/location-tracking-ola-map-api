@@ -7,12 +7,12 @@ const MapContainer: React.FC<{ employeeId: string }> = ({ employeeId }) => {
     const mapRef = useRef<MapLibreMap | null>(null);
     const markerRef = useRef<Marker | null>(null);
     const mapApiKey = import.meta.env.REACT_APP_OLA_MAP_API_KEY;
-    const backendEndpoint = import.meta.env.REACT_APP_BACKEND_ENDPOINT1;
+    const webSocketEndpoint = import.meta.env.REACT_APP_WEBSOCKET_ENDPOINT;
     const [location, setLocation] = useState<{ latitude: number; longitude: number } | null>(null);
-    console.log("neeru backend address - " + backendEndpoint)
+    console.log("neeru websocket address in frontend1 - " + webSocketEndpoint)
 
     useEffect(() => {
-        const socket = new WebSocket(`wss://${backendEndpoint}`);
+        const socket = new WebSocket(`${webSocketEndpoint}`);
 
         socket.onmessage = (event) => {
             const data = JSON.parse(event.data);
